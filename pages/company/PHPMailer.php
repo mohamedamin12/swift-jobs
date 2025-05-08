@@ -72,9 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send_message'])) {
 
         try {
             if ($mail->send()) {
-                $_SESSION['success_message'] = "تم إرسال الرسالة بنجاح!";
-                header("Location: view_project_applicants.php?project_id=" . $_GET['project_id']);
-                exit();
+                $success_message = "تم إرسال الرسالة بنجاح!";
+                // لا يتم التحويل، فقط نعرض الرسالة
+                $_POST = []; // لفض الـ POST عشان يظهر الفورم فارغ
             } else {
                 $error_message = "فشل إرسال البريد الإلكتروني.";
             }
@@ -319,12 +319,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send_message'])) {
 
           <div class="mb-3">
             <label class="form-label">موضوع الرسالة:</label>
-            <input type="text" name="subject" class="form-control" required>
+            <input type="text" name="subject" class="form-control"
+              value="<?= htmlspecialchars($_POST['subject'] ?? ''); ?>" required>
           </div>
 
           <div class="mb-3">
             <label class="form-label">نص الرسالة:</label>
-            <textarea name="message" class="form-control" rows="5" required></textarea>
+            <textarea name="message" class="form-control" rows="5"
+              required><?= htmlspecialchars($_POST['message'] ?? ''); ?></textarea>
           </div>
 
           <div class="d-grid gap-2">

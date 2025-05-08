@@ -26,6 +26,7 @@ if (!$applicant) {
 }
 
 $whatsapp_url = '';
+$success_message = "";
 $error_message = "";
 
 // معالجة الإرسال عند النقر على زر الإرسال
@@ -43,10 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $whatsapp_url .= "%0A" . "نص الرسالة: " . $message;
         $whatsapp_url .= "%0A" . "رقم الهاتف: " . htmlspecialchars($applicant['phone']);
         
-        // تخزين رسالة النجاح في الجلسة وإعادة التوجيه
-        $_SESSION['success_message'] = "تم إنشاء رابط الواتساب بنجاح! يمكنك الآن إرسال الرسالة.";
-        header("Location: view_project_applicants.php?project_id=" . $_GET['project_id']);
-        exit();
+        $success_message = "تم إنشاء رابط الواتساب بنجاح! يمكنك الآن إرسال الرسالة.";
+        $_POST = []; // لفض الـ POST عشان يظهر الفورم فارغ
     }
 }
 ?>
@@ -207,6 +206,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     animation: slideIn 0.5s ease-out;
   }
 
+  .alert-success {
+    background-color: #d1fae5;
+    color: var(--success);
+  }
+
   .alert-danger {
     background-color: #fee2e2;
     color: var(--danger);
@@ -263,6 +267,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1>التواصل مع المتقدم</h1>
       </div>
 
+      <?php if (!empty($success_message)): ?>
+      <div class="alert alert-success">
+        <i class="fas fa-check-circle"></i>
+        <?= htmlspecialchars($success_message); ?>
+      </div>
+      <?php endif; ?>
+
       <?php if (!empty($error_message)): ?>
       <div class="alert alert-danger">
         <i class="fas fa-exclamation-circle"></i>
@@ -289,12 +300,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <div class="mb-3">
             <label class="form-label">موضوع الرسالة:</label>
-            <input type="text" name="subject" class="form-control" required>
+            <input type="text" name="subject" class="form-control"
+              value="<?= htmlspecialchars($_POST['subject'] ?? ''); ?>" required>
           </div>
 
           <div class="mb-3">
             <label class="form-label">نص الرسالة:</label>
-            <textarea name="message" class="form-control" rows="5" required></textarea>
+            <textarea name="message" class="form-control" rows="5"
+              required><?= htmlspecialchars($_POST['message'] ?? ''); ?></textarea>
           </div>
 
           <div class="d-grid gap-2">

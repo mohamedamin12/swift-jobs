@@ -5,16 +5,16 @@
 }
 
 :root {
-  --primary-color: #00b67a;
+  --primary-color: linear-gradient(90deg, #1e3a8a, #3b82f6);
 }
 
 .btn-custom-primary {
-  background-color: var(--primary-color);
+  background: var(--primary-color);
   color: white;
 }
 
 .btn-custom-primary:hover {
-  background-color: #009966;
+  background: linear-gradient(90deg, #1e3a8a, #1e40af);
   color: white;
 }
 
@@ -89,7 +89,7 @@
 }
 
 .job-title-icon {
-  background-color: #00b6b6;
+  background: linear-gradient(90deg, #1e3a8a, #3b82f6);
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -124,7 +124,7 @@
 }
 
 .apply-button {
-  background-color: #5b8f8f;
+  background: linear-gradient(90deg, #1e3a8a, #3b82f6);
   color: white;
   border: none;
   border-radius: 6px;
@@ -136,7 +136,7 @@
 }
 
 .apply-button:hover {
-  background-color: #4a7a7a;
+  background: linear-gradient(90deg, #1e3a8a, #1e40af);
 }
 
 @media (max-width: 768px) {
@@ -146,7 +146,7 @@
 }
 
 .about {
-  background: linear-gradient(135deg, #00B67A 0%, #008C5F 100%);
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
   min-height: 500px;
   padding: 2rem;
   display: flex;
@@ -185,7 +185,7 @@
 }
 
 .about-button {
-  background-color: #00B67A;
+  background: linear-gradient(90deg, #1e3a8a, #3b82f6);
   color: white;
   border: 2px solid white;
   padding: 0.8rem 2.5rem;
@@ -196,8 +196,8 @@
 }
 
 .about-button:hover {
-  background-color: white;
-  color: #00B67A;
+  background: white;
+  color: #1e3a8a;
 }
 
 .about-image {

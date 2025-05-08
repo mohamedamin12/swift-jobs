@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="reg-wrapper">
   <div class="reg-form">
-    <h1 class="reg-heading">سجل كمنشأة</h1>
+    <h1 class="reg-heading" style="margin-top: 25px;">سجل كمنشأة</h1>
 
     <?php if (isset($error_message)): ?>
     <div class="alert alert-danger"> <?= $error_message; ?> </div>

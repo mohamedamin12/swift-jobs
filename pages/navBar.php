@@ -99,11 +99,31 @@ require_once 'config.php'; // استدعاء `BASE_URL`
     box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.5);
   }
 
+  /* فصل الروابط بتاعة الـ admin */
+  .admin-links {
+    margin-left: auto;
+    /* تباعد عن الروابط العادية */
+    display: flex;
+    gap: 10px;
+  }
+
+  .admin-links .nav-link {
+    padding: 8px 15px;
+    background: #e0e7ff;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .admin-links .nav-link:hover {
+    background: #d1d9f0;
+    color: #1e40af;
+    transform: translateY(-2px);
+  }
+
   @media (max-width: 768px) {
     .dropdown-menu {
       min-width: 200px;
       transform: translateX(-10px);
-      /* إزاحة أقل على الموبايل */
       right: 0 !important;
       left: auto !important;
     }
@@ -116,6 +136,17 @@ require_once 'config.php'; // استدعاء `BASE_URL`
     .dropdown-toggle {
       padding: 6px 15px;
       font-size: 14px;
+    }
+
+    .admin-links {
+      margin-left: 0;
+      /* إزالة التباعد في الموبايل */
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .admin-links .nav-link {
+      padding: 6px 10px;
     }
   }
   </style>
@@ -155,9 +186,21 @@ require_once 'config.php'; // استدعاء `BASE_URL`
           </li>
         </ul>
 
+        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+        <div class="admin-links">
+          <a class="nav-link" href="<?= BASE_URL ?>admin/admin_dashboard.php">
+            <i class="fas fa-shield-alt me-2"></i> لوحة تحكم الأدمن
+          </a>
+          <a class="nav-link" href="<?= BASE_URL ?>admin/edit_profile.php">
+            <i class="fas fa-user-lock me-2"></i> تعديل الحساب
+          </a>
+        </div>
+        <?php endif; ?>
+
         <div class="d-flex gap-2">
           <?php if (isset($_SESSION['role'])): ?>
-          <!-- Dropdown للـ Role Access -->
+          <?php if ($_SESSION['role'] === 'employee' || $_SESSION['role'] === 'craftsman'): ?>
+          <!-- Dropdown للـ Role Access لـ employee و craftsman -->
           <div class="dropdown">
             <button class="btn btn-outline-primary dropdown-toggle" type="button" id="roleDropdown"
               data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
@@ -216,37 +259,23 @@ require_once 'config.php'; // استدعاء `BASE_URL`
                   <i class="fas fa-user-edit me-2"></i> تعديل الحساب
                 </a>
               </li>
-              <?php elseif ($_SESSION['role'] === 'company'): ?>
-              <li>
-                <a class="dropdown-item" href="<?= BASE_URL ?>company/company_dashboard.php">
-                  <i class="fas fa-tachometer-alt me-2"></i> لوحة تحكم الشركة
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="<?= BASE_URL ?>company/edit_profile.php">
-                  <i class="fas fa-cog me-2"></i> تعديل الحساب
-                </a>
-              </li>
-              <?php elseif ($_SESSION['role'] === 'admin'): ?>
-              <li>
-                <a class="dropdown-item" href="<?= BASE_URL ?>admin/admin_dashboard.php">
-                  <i class="fas fa-shield-alt me-2"></i> لوحة تحكم الأدمن
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="<?= BASE_URL ?>admin/edit_profile.php">
-                  <i class="fas fa-user-lock me-2"></i> تعديل الحساب
-                </a>
-              </li>
               <?php endif; ?>
-              <!-- رابط تسجيل الخروج داخل الـ Dropdown -->
-              <li>
-                <a class="dropdown-item text-danger" href="<?= BASE_URL ?>logout.php">
-                  <i class="fas fa-sign-out-alt me-2"></i> تسجيل الخروج
-                </a>
-              </li>
             </ul>
           </div>
+          <?php elseif ($_SESSION['role'] === 'company'): ?>
+          <!-- روابط مباشرة لـ company -->
+          <a class="btn btn-outline-primary" href="<?= BASE_URL ?>company/company_dashboard.php">
+            <i class="fas fa-tachometer-alt me-1"></i> لوحة تحكم الشركة
+          </a>
+          <a class="btn btn-outline-primary" href="<?= BASE_URL ?>company/edit_profile.php">
+            <i class="fas fa-cog me-1"></i> تعديل الحساب
+          </a>
+          <?php endif; ?>
+
+          <!-- رابط تسجيل الخروج لكل الـ roles -->
+          <a class="btn btn-danger" href="<?= BASE_URL ?>logout.php">
+            <i class="fas fa-sign-out-alt me-1"></i> تسجيل الخروج
+          </a>
           <?php else: ?>
           <!-- أزرار تسجيل الدخول والتسجيل للمستخدم غير المسجل -->
           <a href="<?= BASE_URL ?>login.php" class="btn btn-primary">تسجيل الدخول</a>
@@ -263,14 +292,16 @@ require_once 'config.php'; // استدعاء `BASE_URL`
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const dropdownElement = document.getElementById('roleDropdown');
-    if (dropdownElement) {
-      dropdownElement.addEventListener('click', function(e) {
-        e.preventDefault();
-        const dropdown = new bootstrap.Dropdown(dropdownElement);
-        dropdown.toggle();
+    const dropdownElements = document.querySelectorAll('.dropdown-toggle');
+    dropdownElements.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const dropdown = bootstrap.Dropdown.getOrCreateInstance(this);
+        if (dropdown._menu) {
+          dropdown.toggle();
+        }
       });
-    }
+    });
   });
   </script>
 </body>

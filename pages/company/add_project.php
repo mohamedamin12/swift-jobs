@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_project'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale Kin=1.0">
-  <title>إضافة مشروع</title>
+  <title>إضافة حرفه</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -244,7 +244,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_project'])) {
     <!-- المحتوى الرئيسي -->
     <main class="content">
       <div class="form-card">
-        <h1>إضافة مشروع جديد</h1>
+        <h1>إضافة حرفه </h1>
 
         <?php if (isset($success_message)): ?>
         <div class="alert alert-success">
@@ -296,7 +296,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_project'])) {
 
           <div class="col-12 text-center mt-4">
             <button type="submit" name="add_project" class="btn btn-primary">
-              <i class="fas fa-plus-circle"></i> إضافة المشروع
+              <i class="fas fa-plus-circle"></i> إضافة حرفه
             </button>
           </div>
         </form>

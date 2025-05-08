@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <div class="reg-wrapper">
     <div class="reg-form">
-      <h1 class="reg-heading mt-3">سجل كفرد أو حرفي</h1>
+      <h1 class="reg-heading mt-3">سجل كموظف أو حرفي</h1>
 
       <?php if (isset($success_message)): ?>
       <div class="alert alert-success"><?= $success_message; ?></div>
