@@ -315,7 +315,7 @@ $stmt->close();
             </svg>
           </div>
           <div class="value"><?php echo $project_count; ?></div>
-          <div class="label">المشاريع المنشورة</div>
+          <div class="label">الحرف المنشورة</div>
         </div>
         <div class="stat-card">
           <i class="fas fa-star icon"></i>
@@ -347,13 +347,13 @@ $stmt->close();
           </a>
           <a href="add_project.php" class="action-item">
             <i class="fas fa-briefcase"></i>
-            <div class="title">إضافة مشروع</div>
+            <div class="title">إضافة حرفه</div>
             <div class="desc">إنشاء تصنيف مهني جديد</div>
           </a>
           <a href="view_projects.php" class="action-item">
             <i class="fas fa-project-diagram"></i>
-            <div class="title">إدارة المشاريع</div>
-            <div class="desc">عرض وتعديل المشاريع المنشورة</div>
+            <div class="title">إدارة الحرف</div>
+            <div class="desc">عرض وتعديل الحرف المنشورة</div>
           </a>
         </div>
       </div>

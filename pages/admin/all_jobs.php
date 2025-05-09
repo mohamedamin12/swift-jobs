@@ -221,7 +221,6 @@ $jobs = $result->fetch_all(MYSQLI_ASSOC);
             <td><?php echo htmlspecialchars($job['name'] ?? ''); ?></td>
             <td><?php echo htmlspecialchars($job['location'] ?? ''); ?></td>
             <td><?php echo !empty($job['salary']) ? htmlspecialchars($job['salary']) : 'غير محدد'; ?></td>
-            </td>
             <td>
               <span class="badge <?php echo ($job['status'] ?? 1) ? 'bg-success' : 'bg-warning'; ?>">
                 <?php echo ($job['status'] ?? 1) ? 'نشطة' : 'غير نشطة'; ?>
@@ -229,6 +228,10 @@ $jobs = $result->fetch_all(MYSQLI_ASSOC);
             </td>
             <td>
               <div class="btn-group" role="group">
+                <a href="job_details.php?job_id=<?php echo htmlspecialchars($job['job_id']); ?>"
+                  class="btn btn-sm btn-info" title="عرض التفاصيل">
+                  <i class="fas fa-eye"></i>
+                </a>
                 <?php if ($job['status'] ?? 1): ?>
                 <a href="?status=inactive&job_id=<?php echo htmlspecialchars($job['job_id']); ?>"
                   class="btn btn-sm btn-warning" onclick="return confirm('هل أنت متأكد أنك تريد تعطيل هذه الوظيفة؟')"
@@ -242,7 +245,6 @@ $jobs = $result->fetch_all(MYSQLI_ASSOC);
                   <i class="fas fa-check"></i>
                 </a>
                 <?php endif; ?>
-
                 <a href="?delete=<?php echo htmlspecialchars($job['job_id']); ?>" class="btn btn-sm btn-danger"
                   onclick="return confirm('هل أنت متأكد أنك تريد حذف هذه الوظيفة؟')" title="حذف الوظيفة">
                   <i class="fas fa-trash"></i>

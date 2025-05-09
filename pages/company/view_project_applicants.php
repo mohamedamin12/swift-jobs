@@ -42,7 +42,7 @@ if (!$project) {
     exit();
 }
 
-// جلب المتقدمين للمشروع
+// جلب المتقدمين للحرفه
 $sql = "SELECT u.user_id, u.name, u.phone, u.specialization, u.profile_pic, 
                pb.bid_id, pb.bid_amount, pb.proposal, pb.bid_date, pb.status
         FROM project_bids pb
@@ -62,7 +62,7 @@ $stmt->close();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>المتقدمون للمشروع</title>
+  <title>المتقدمون للحرفه</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -364,7 +364,7 @@ $stmt->close();
     <!-- المحتوى الرئيسي -->
     <main class="content">
       <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>المتقدمون للمشروع: <?= htmlspecialchars($project['title']); ?></h1>
+        <h1>المتقدمون للحرفه: <?= htmlspecialchars($project['title']); ?></h1>
         <a href="view_projects.php" class="btn btn-primary">
           <i class="fas fa-arrow-right"></i> رجوع
         </a>

@@ -59,7 +59,7 @@ $query = "SELECT p.*, c.name AS company_name, c.logo
 // إضافة عوامل التصفية
 $search = $_GET['search'] ?? '';
 if (!empty($search)) {
-  $query .= " AND (p.title LIKE ? OR p.description LIKE ? OR u.name LIKE ?)";
+  $query .= " AND (p.title LIKE ? OR p.description LIKE ? OR c.name LIKE ?)";
 }
 
 // إضافة الترتيب
@@ -99,7 +99,7 @@ try {
   $stmt->execute($params);
 } catch (Exception $e) {
   if (strpos($e->getMessage(), 'Unknown column') !== false) {
-    $query = str_replace('u.company_name', 'u.name', $query);
+    $query = str_replace('u.company_name', 'c.name', $query);
     $stmt = $conn->prepare($query);
     $stmt->execute($params);
   } else {
@@ -214,8 +214,8 @@ $projects = $result->fetch_all(MYSQLI_ASSOC);
           <?php foreach ($projects as $project): ?>
           <tr>
             <td>
-              <?php if (!empty($project['profile_pic'])): ?>
-              <img src="../<?php echo htmlspecialchars($project['profile_pic']); ?>"
+              <?php if (!empty($project['logo'])): ?>
+              <img src="../<?php echo htmlspecialchars($project['logo']); ?>"
                 alt="<?php echo htmlspecialchars($project['company_name']); ?>" class="company-logo me-2">
               <?php endif; ?>
             </td>
@@ -225,7 +225,7 @@ $projects = $result->fetch_all(MYSQLI_ASSOC);
             </td>
             <td><?php echo htmlspecialchars($project['company_name']); ?></td>
             <td><?php echo htmlspecialchars($project['location']); ?></td>
-            <td class="budget"><?php echo number_format($project['budget'], 2); ?> ر.س</td>
+            <td class="budget"><?php echo number_format($project['budget'], 2); ?> ج.م</td>
             <td>
               <span class="badge <?php echo ($project['status'] === 'open') ? 'badge-open' : 'badge-closed'; ?>">
                 <?php echo ($project['status'] === 'open') ? 'مفتوح' : 'مغلق'; ?>
@@ -233,6 +233,10 @@ $projects = $result->fetch_all(MYSQLI_ASSOC);
             </td>
             <td>
               <div class="btn-group" role="group">
+                <a href="project_details.php?project_id=<?php echo htmlspecialchars($project['project_id']); ?>"
+                  class="btn btn-sm btn-info" title="مشاهدة التفاصيل">
+                  <i class="fas fa-eye"></i>
+                </a>
                 <?php if ($project['status'] === 'open'): ?>
                 <a href="?status=inactive&project_id=<?php echo htmlspecialchars($project['project_id']); ?>"
                   class="btn btn-sm btn-warning" onclick="return confirm('هل أنت متأكد أنك تريد إغلاق هذا المشروع؟')"
@@ -243,7 +247,7 @@ $projects = $result->fetch_all(MYSQLI_ASSOC);
                 <a href="?status=active&project_id=<?php echo htmlspecialchars($project['project_id']); ?>"
                   class="btn btn-sm btn-success" onclick="return confirm('هل أنت متأكد أنك تريد فتح هذا المشروع؟')"
                   title="فتح المشروع">
-                  <i class="fas fas fa-check"></i>
+                  <i class="fas fa-check"></i>
                 </a>
                 <?php endif; ?>
 

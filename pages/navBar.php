@@ -229,6 +229,11 @@ require_once 'config.php'; // استدعاء `BASE_URL`
                 </a>
               </li>
               <li>
+                <a class="dropdown-item" href="<?= BASE_URL ?>employee/interview_sim.php">
+                  <i class="fas fa-user-tie me-2"></i>محكاة المقابلات
+                </a>
+              </li>
+              <li>
                 <a class="dropdown-item" href="<?= BASE_URL ?>employee/edit_profile.php">
                   <i class="fas fa-user-cog me-2"></i> تعديل الحساب
                 </a>

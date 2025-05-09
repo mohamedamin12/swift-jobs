@@ -202,8 +202,7 @@
   </style>
 </head>
 
-<body>
-
+<body>>
 
   <div class="coming-soon-container">
     <div class="coming-soon-content">

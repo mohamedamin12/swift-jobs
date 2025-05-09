@@ -33,7 +33,7 @@ $stmt->close();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>إدارة المشاريع</title>
+  <title>إدارة الحرف</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -287,7 +287,7 @@ $stmt->close();
 
     <!-- المحتوى الرئيسي -->
     <main class="content">
-      <h1>إدارة المشاريع</h1>
+      <h1>إدارة الحرف</h1>
 
       <?php if (empty($projects)): ?>
       <div class="empty-state">
@@ -302,7 +302,7 @@ $stmt->close();
           <div class="status <?= $project['status'] == 'open' ? '' : 'closed'; ?>">
             <?= htmlspecialchars($project['status'] == 'open' ? 'مفتوح' : 'مغلق'); ?>
           </div>
-          <p><i class="fas fa-briefcase"></i> نوع المشروع: <?= htmlspecialchars($project['project_type']); ?></p>
+          <p><i class="fas fa-briefcase"></i> نوع الحرفه: <?= htmlspecialchars($project['project_type']); ?></p>
           <p><i class="fas fa-money-bill-wave"></i> الميزانية: <?= number_format($project['budget'], 2); ?> ج.م</p>
           <p><i class="fas fa-map-marker-alt"></i> الموقع: <?= htmlspecialchars($project['location']); ?></p>
           <p><i class="fas fa-users"></i> عدد المتقدمين: <?= $project['applicants_count']; ?></p>
@@ -317,7 +317,7 @@ $stmt->close();
               <i class="fas fa-edit"></i> تعديل
             </a>
             <a href="delete_project.php?project_id=<?= $project['project_id']; ?>" class="btn btn-danger"
-              onclick="return confirm('هل أنت متأكد من حذف هذا المشروع؟');">
+              onclick="return confirm('هل أنت متأكد من حذف هذا الحرفه؟');">
               <i class="fas fa-trash"></i> حذف
             </a>
           </div>
